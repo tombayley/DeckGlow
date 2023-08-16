@@ -1,0 +1,136 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:DeckGlow.Views.Controls" 
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:deckGlow="clr-namespace:DeckGlow"
+    mc:Ignorable="av"
+    x:Class="DeckGlow.Views.MainWindow"
+    Title="{StaticResource AppName}"
+    Height="600"
+    Width="500"
+    Background="{DynamicResource MaterialDesignPaper}"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Medium"
+    TextElement.FontSize="14"
+    FontFamily="{materialDesign:MaterialDesignFont}"
+    Icon="/Assets/app-icon.ico"
+    WindowStartupLocation="CenterScreen"
+    >
+
+    <DockPanel Margin="12">
+
+        <StackPanel
+            DockPanel.Dock="Top"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            >
+
+            <Image
+                Source="/Assets/app-icon.png"
+                Height="40"
+                Width="40"
+                />
+
+            <TextBlock
+                Text="{StaticResource AppName}"
+                VerticalAlignment="Center"
+                TextAlignment="Center"
+                FontSize="18"
+                Margin="16,0,0,0"
+                />
+
+        </StackPanel>
+        
+        <StackPanel
+            DockPanel.Dock="Top"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Margin="0,12,0,0"
+            >
+
+            <Label
+                Content="Default Brightness"
+                VerticalAlignment="Center"
+                Margin="0,0,16,0"
+                />
+
+            <uc:BrightnessSlider
+                DockPanel.Dock="Top"
+                Width="200"
+                Brightness="{Binding DefaultBrightness, Mode=TwoWay}"
+                />
+
+        </StackPanel>
+
+        <Grid
+            DockPanel.Dock="Bottom"
+            >
+
+            <Button
+                HorizontalAlignment="Center"
+                Click="AddApp_Click"
+                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                >
+                <materialDesign:PackIcon
+                    Width="28"
+                    Height="28"
+                    Kind="Plus"
+                    Foreground="White" />
+            </Button>
+
+            <Button
+                Click="ButtonVersion_OnClick"
+                Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                >
+                <TextBlock
+                    FontSize="12"
+                    Background="{x:Null}"
+                    >
+                    <Run Text="v" />
+                    <Run Text="{x:Static deckGlow:App.VersionString}" />
+                    <Run Text=" ↗" />
+                </TextBlock>
+            </Button>
+
+        </Grid>
+
+        <materialDesign:Card
+            DockPanel.Dock="Top"
+            Margin="0 12"
+            Style="{StaticResource MaterialDesignOutlinedCard}"
+            Background="#33000000"
+            UniformCornerRadius="20"
+            >
+            <Grid>
+                <ScrollViewer
+                    VerticalScrollBarVisibility="Auto"
+                    >
+                    <ItemsControl
+                        ItemsSource="{Binding AppItems}"
+                        HorizontalContentAlignment="Stretch"
+                        Padding="12,8"
+                        >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <uc:AppItem DataContext="{Binding}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <materialDesign:Snackbar
+                    x:Name="AppDeletedSnackbar"
+                    MessageQueue="{materialDesign:MessageQueue}"
+                    >
+                </materialDesign:Snackbar>
+
+            </Grid>
+
+        </materialDesign:Card>
+
+    </DockPanel>
+
+</Window>
