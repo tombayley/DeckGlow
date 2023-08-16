@@ -1,6 +1,6 @@
 [![Release](https://img.shields.io/github/release/tombayley/DeckGlow.svg)](https://github.com/tombayley/DeckGlow/releases)
 ![OS - Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows&logoColor=white)
-[![Build](https://img.shields.io/github/actions/workflow/status/tombayley/DeckGlow/main.yml?branch=master)](https://github.com/tombayley/DeckGlow/actions)
+[![Build](https://img.shields.io/github/actions/workflow/status/tombayley/DeckGlow/main.yml?branch=main)](https://github.com/tombayley/DeckGlow/actions)
 
 <p align="center">
     <img src="res/app-icon.png" style="width: 100px;" />
