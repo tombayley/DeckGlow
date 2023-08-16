@@ -20,8 +20,7 @@ It runs in the background in the system tray. Click the tray icon to open the ma
 If you encounter a popup saying "Windows protected your PC", or similar, click "More Info" in the popup and then click "Run" to continue installing.
 Windows displays this security popup because the installer isn't signed. Signing costs hundreds of dollars per year and therefore isn't worth it.
 
-The app is built and released automatically from source using GitHub Actions [here](.github/workflows
-/main.yml).
+The app is built and released automatically from source using GitHub Actions [here](.github/workflows/main.yml).
 
 
 ## Compatibility
