@@ -83,7 +83,9 @@
 
             <Button
                 Click="ButtonVersion_OnClick"
-                Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
                 >
                 <TextBlock
                     FontSize="12"

@@ -4,6 +4,7 @@ using System.Windows.Interop;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System;
+using Serilog;
 
 namespace DeckGlow.ViewModels
 {
@@ -51,17 +52,28 @@ namespace DeckGlow.ViewModels
 
         private void UpdateIcon()
         {
-            if (!string.IsNullOrEmpty(AppPath))
+            if (string.IsNullOrEmpty(AppPath))
             {
-                Icon? icon = Icon.ExtractAssociatedIcon(AppPath);
-                if (icon != null)
+                AppIcon = null;
+                return;
+            }
+
+            try
+            {
+                using (Icon? icon = Icon.ExtractAssociatedIcon(AppPath))
                 {
+                    if (icon == null)
+                    {
+                        AppIcon = null;
+                        return;
+                    }
                     AppIcon = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                    icon.Dispose();
-                    return;
                 }
             }
-            AppIcon = null;
+            catch (FileNotFoundException ex)
+            {
+                Log.Error(ex, $"File not found: {ex.FileName}", ex.Message);
+            }
         }
 
     }
