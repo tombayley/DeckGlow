@@ -1,6 +1,6 @@
 #define AppName "Deck Glow"
 #define AppExe "DeckGlow.exe"
-#define AppVersion "1.0.0"
+#define AppVersion "1.0.1"
 
 [Setup]
 AppId={{A83104B4-81A8-4EC9-8619-FE97829D5C26}
