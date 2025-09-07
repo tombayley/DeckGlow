@@ -5,12 +5,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uc="clr-namespace:DeckGlow.Views.Controls" 
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
     xmlns:deckGlow="clr-namespace:DeckGlow"
     mc:Ignorable="av"
     x:Class="DeckGlow.Views.MainWindow"
     Title="{StaticResource AppName}"
     Height="600"
-    Width="500"
+    Width="550"
     Background="{DynamicResource MaterialDesignPaper}"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextElement.FontWeight="Medium"
@@ -68,18 +69,44 @@
         <Grid
             DockPanel.Dock="Bottom"
             >
-
-            <Button
+            
+            <StackPanel
+                Orientation="Horizontal"
                 HorizontalAlignment="Center"
-                Click="AddApp_Click"
-                Style="{StaticResource MaterialDesignFloatingActionButton}"
                 >
-                <materialDesign:PackIcon
-                    Width="28"
-                    Height="28"
-                    Kind="Plus"
-                    Foreground="White" />
-            </Button>
+                <Button
+                    HorizontalAlignment="Center"
+                    Click="AddFolder_Click"
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    ToolTip="Add a folder"
+                    Margin="12,0"
+                    Width="60"
+                    Height="60"
+                    >
+                    <svgc:SvgViewbox
+                        Width="28"
+                        Height="28"
+                        Source="/Assets/add-folder.svg"
+                        />
+                </Button>
+
+                <Button
+                    HorizontalAlignment="Center"
+                    Click="AddApp_Click"
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    ToolTip="Add a program"
+                    Margin="12,0"
+                    Width="60"
+                    Height="60"
+                    >
+                    <svgc:SvgViewbox
+                        Width="28"
+                        Height="28"
+                        Source="/Assets/add-exe.svg"
+                        />
+                </Button>
+
+            </StackPanel>
 
             <Button
                 Click="ButtonVersion_OnClick"

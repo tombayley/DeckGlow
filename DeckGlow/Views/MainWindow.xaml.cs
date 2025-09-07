@@ -1,10 +1,10 @@
-﻿using Microsoft.Win32;
-using DeckGlow.ViewModels;
+﻿using DeckGlow.ViewModels;
+using Microsoft.Win32;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Diagnostics;
 
 namespace DeckGlow.Views
 {
@@ -43,6 +43,18 @@ namespace DeckGlow.Views
             if (!result) return;
 
             _viewModel.AddApp(dialog.FileName, 100);
+        }
+
+        private void AddFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFolderDialog
+            {
+                Title = "Select folder"
+            };
+            bool result = dialog.ShowDialog() ?? false;
+            if (!result) return;
+
+            _viewModel.AddApp(dialog.FolderName, 100);
         }
 
         private void SliderDefaultBrightness_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

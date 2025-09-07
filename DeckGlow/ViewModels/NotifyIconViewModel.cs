@@ -7,7 +7,6 @@ using System.Windows.Input;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using DeckGlow.Views;
-using Serilog;
 
 namespace DeckGlow.ViewModels
 {

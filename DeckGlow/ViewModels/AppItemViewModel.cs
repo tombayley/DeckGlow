@@ -1,10 +1,11 @@
-﻿using System.Drawing;
-using System.IO;
-using System.Windows.Interop;
-using System.Windows;
-using System.Windows.Media.Imaging;
+﻿using Serilog;
 using System;
-using Serilog;
+using System.Drawing;
+using System.IO;
+using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace DeckGlow.ViewModels
 {
@@ -48,7 +49,7 @@ namespace DeckGlow.ViewModels
 
         public string AppName { get => Path.GetFileNameWithoutExtension(AppPath); }
 
-        public BitmapSource? AppIcon { get; set; }
+        public ImageSource? AppIcon { get; set; }
 
         private void UpdateIcon()
         {
@@ -60,14 +61,25 @@ namespace DeckGlow.ViewModels
 
             try
             {
-                using (Icon? icon = Icon.ExtractAssociatedIcon(AppPath))
+                if (Directory.Exists(AppPath))
                 {
-                    if (icon == null)
+                    AppIcon = Util.LoadSvg("Assets/folder.svg");
+                }
+                else if (File.Exists(AppPath) && Path.GetExtension(AppPath).Equals(".exe", StringComparison.OrdinalIgnoreCase))
+                {
+                    using (Icon? icon = Icon.ExtractAssociatedIcon(AppPath))
                     {
-                        AppIcon = null;
-                        return;
+                        if (icon == null)
+                        {
+                            AppIcon = null;
+                            return;
+                        }
+                        AppIcon = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                     }
-                    AppIcon = Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                }
+                else
+                {
+                    AppIcon = null;
                 }
             }
             catch (FileNotFoundException ex)

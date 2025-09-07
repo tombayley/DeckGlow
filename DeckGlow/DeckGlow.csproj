@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Assets\app-icon.ico</ApplicationIcon>
@@ -10,8 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\add-exe.svg" />
+    <None Remove="Assets\add-folder.svg" />
     <None Remove="Assets\app-icon.ico" />
     <None Remove="Assets\app-icon.png" />
+    <None Remove="Assets\folder.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\folder.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +30,13 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog" Version="3.0.1" />
+    <PackageReference Include="SharpVectors.Wpf" Version="1.8.5" />
     <PackageReference Include="StreamDeckSharp" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\add-exe.svg" />
+    <Resource Include="Assets\add-folder.svg" />
     <Resource Include="Assets\app-icon.ico" />
     <Resource Include="Assets\app-icon.png">
       <CopyToOutputDirectory></CopyToOutputDirectory>

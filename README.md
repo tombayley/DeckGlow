@@ -23,6 +23,11 @@ Windows displays this security popup because the installer isn't signed. Signing
 The app is built and released automatically from source using GitHub Actions [here](.github/workflows/main.yml).
 
 
+## Features
+- Set the Stream Deck brightness based on the focused program
+- Add a folder to set the brightness of all focused programs in subfolders
+
+
 ## Compatibility
 - Should work for all Stream Deck models
 

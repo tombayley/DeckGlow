@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DeckGlow.Data
 {
@@ -12,7 +13,7 @@ namespace DeckGlow.Data
 
         public AppConfig()
         {
-            AppConfigDict = new Dictionary<string, AppConfigItem>();
+            AppConfigDict = new Dictionary<string, AppConfigItem>(StringComparer.OrdinalIgnoreCase);
         }
 
         public void SetAppBrightness(string key, int brightness)
@@ -23,8 +24,28 @@ namespace DeckGlow.Data
 
         public AppConfigItem? GetApp(string key)
         {
-            AppConfigDict.TryGetValue(key, out AppConfigItem? appConfigItem);
-            return appConfigItem;
+            // Check for exact match first
+            if (AppConfigDict.TryGetValue(key, out AppConfigItem? appConfigItem))
+            {
+                return appConfigItem;
+            }
+            // Check for subdirectory match
+            return GetAppForDir(key);
+        }
+
+        public AppConfigItem? GetAppForDir(string dirPath)
+        {
+            foreach (var entry in AppConfigDict)
+            {
+                string dictPath = Path.GetFullPath(entry.Key).ToLowerInvariant();
+                // Check if the dirPath is a subdirectory of the dictionary path
+                if (dirPath.StartsWith(dictPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    return entry.Value;
+                }
+            }
+            // No match found
+            return null;
         }
 
         public void AddApp(string appName, int brightness)
